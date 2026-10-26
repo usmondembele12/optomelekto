@@ -1,0 +1,108 @@
+{
+  "orders": [
+    {
+      "id": "OE-1004",
+      "createdAt": "2026-10-26T16:51:13.290Z",
+      "status": "Yangi",
+      "customerName": "Usmon Abdulhamidov",
+      "phone": "+998 98 111 01 51",
+      "district": "Toshkent shahri (Sergeli)",
+      "address": "Savatchi 44A",
+      "paymentMethod": "Naqd yetkazilganda",
+      "notes": "1 buxtada berislin",
+      "items": [
+        {
+          "id": "prod-2",
+          "name": "Kabel VVG-P ng(A)-LS 3x1.5 mm² GOST (Mis)",
+          "price": 8200,
+          "originalPrice": 8200,
+          "isWholesale": false,
+          "unit": "metr",
+          "quantity": 1,
+          "subtotal": 8200
+        }
+      ],
+      "totalAmount": 8200
+    },
+    {
+      "id": "OE-1003",
+      "createdAt": "2026-10-26T16:49:54.773Z",
+      "status": "Yangi",
+      "customerName": "Usmon Abdu;hamidov",
+      "phone": "+998 98 111 0151",
+      "district": "Sergeli tumani",
+      "address": "savatchi 44A",
+      "paymentMethod": "Naqd yetkazilganda",
+      "notes": "1 bosishda tezkor buyurtma orqali yuborildi.",
+      "items": [
+        {
+          "id": "prod-2",
+          "name": "Kabel VVG-P ng(A)-LS 3x1.5 mm² GOST (Mis)",
+          "price": 8200,
+          "originalPrice": 8200,
+          "isWholesale": false,
+          "unit": "metr",
+          "quantity": 1,
+          "subtotal": 8200
+        }
+      ],
+      "totalAmount": 8200
+    },
+    {
+      "id": "OE-1002",
+      "createdAt": "2026-10-26T14:54:50.324Z",
+      "status": "Yangi",
+      "customerName": "Test Xaridor",
+      "phone": "+998 90 111 22 33",
+      "district": "Chilonzor tumani",
+      "address": "Muqimiy ko'chasi, 45-uy",
+      "paymentMethod": "Naqd yetkazilganda",
+      "notes": "Test buyurtma tizimi tekshiruvi",
+      "items": [
+        {
+          "id": "prod-1",
+          "name": "Kabel VVG-P ng(A)-LS 3x2.5 mm² GOST (Mis)",
+          "price": 10800,
+          "quantity": 100,
+          "unit": "metr",
+          "subtotal": 1080000
+        }
+      ],
+      "totalAmount": 1080000
+    },
+    {
+      "id": "OE-1001",
+      "createdAt": "2026-10-26T18:20:00.000Z",
+      "customerName": "Rustam Karimov",
+      "phone": "+998 90 987 65 43",
+      "district": "Chilonzor tumani",
+      "address": "Chilonzor 9-mavze, 14-uy, 25-xonadon",
+      "paymentMethod": "Naqd yetkazilganda",
+      "status": "Yangi",
+      "notes": "Ertalab soat 10:00 gacha yetkazilsa ma'qul bo'lardi.",
+      "items": [
+        {
+          "id": "prod-1",
+          "name": "Kabel VVG-P ng(A)-LS 3x2.5 mm² GOST (Mis)",
+          "price": 10800,
+          "originalPrice": 12500,
+          "isWholesale": true,
+          "unit": "metr",
+          "quantity": 100,
+          "subtotal": 1080000
+        },
+        {
+          "id": "prod-3",
+          "name": "Avtomatik o'chirgich Schneider EasyPact 1P 16A C",
+          "price": 38500,
+          "originalPrice": 45000,
+          "isWholesale": true,
+          "unit": "dona",
+          "quantity": 12,
+          "subtotal": 462000
+        }
+      ],
+      "totalAmount": 1542000
+    }
+  ]
+}

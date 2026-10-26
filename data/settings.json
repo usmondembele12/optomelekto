@@ -1,0 +1,17 @@
+{
+  "storeName": "Optom Elektro Toshkent",
+  "tagline": "Toshkentda elektrotexnika va kabellar ulgurji markazi",
+  "phone": "+998 71 200 45 45",
+  "phoneSecondary": "+998 90 123 45 67",
+  "telegramManager": "@optomelektro_admin",
+  "email": "info@optomelektro.uz",
+  "city": "Toshkent shahri",
+  "address": "Toshkent sh., Sergeli tumani, Yangi Sergeli ko'chasi, 12-uy (Elektr bozori, 4-blok)",
+  "workingHours": "Dush - Shan: 08:30 - 18:30 | Yak: 09:00 - 15:00",
+  "telegramBotToken": "",
+  "telegramChatId": "",
+  "telegramNotificationsEnabled": true,
+  "adminPassword": "admin",
+  "minWholesaleOrderSum": 500000,
+  "freeDeliveryThreshold": 1000000
+}
