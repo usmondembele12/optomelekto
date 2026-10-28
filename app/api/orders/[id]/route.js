@@ -4,6 +4,14 @@ import { sendOrderToTelegram } from "@/lib/telegram";
 
 export async function PATCH(request, context) {
   try {
+    const authCookie = request.cookies.get("optom_admin_auth");
+    if (authCookie?.value !== "authenticated_token_true") {
+      return NextResponse.json(
+        { success: false, error: "Avtorizatsiyadan o'tilmagan" },
+        { status: 401 }
+      );
+    }
+
     const { id } = await context.params;
     const body = await request.json();
 

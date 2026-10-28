@@ -37,6 +37,14 @@ export async function GET(request) {
 
 export async function POST(request) {
   try {
+    const authCookie = request.cookies.get("optom_admin_auth");
+    if (authCookie?.value !== "authenticated_token_true") {
+      return NextResponse.json(
+        { success: false, error: "Avtorizatsiyadan o'tilmagan" },
+        { status: 401 }
+      );
+    }
+
     const body = await request.json();
 
     if (!body.name || !body.price) {

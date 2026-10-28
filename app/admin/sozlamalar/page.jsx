@@ -11,6 +11,7 @@ import {
   MapPin,
   Lock,
   Key,
+  Database,
 } from "lucide-react";
 
 export default function AdminSettingsPage() {
@@ -32,6 +33,8 @@ export default function AdminSettingsPage() {
   const [testResult, setTestResult] = useState(null);
   const [saveSuccess, setSaveSuccess] = useState(false);
 
+  const [hasMongo, setHasMongo] = useState(false);
+
   useEffect(() => {
     async function loadSettings() {
       try {
@@ -39,6 +42,7 @@ export default function AdminSettingsPage() {
         const data = await res.json();
         if (data.success && data.settings) {
           setSettings(data.settings);
+          setHasMongo(Boolean(data.hasMongo));
         }
       } catch (e) {
         console.error(e);
@@ -367,6 +371,64 @@ export default function AdminSettingsPage() {
               className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 font-mono text-xs"
             />
           </div>
+        </div>
+
+        {/* Backend Database Status */}
+        <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+          <div className="flex items-center gap-3 border-b border-slate-100 pb-4">
+            <div className="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-600 flex items-center justify-center font-bold">
+              <Database className="w-5 h-5" />
+            </div>
+            <div>
+              <h3 className="font-black text-slate-900 text-base">
+                Backend Ma'lumotlar Bazasi (MongoDB)
+              </h3>
+              <p className="text-xs text-slate-500">
+                Tovarlar, buyurtmalar va sozlamalarni bulutli bazada doimiy saqlash
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <span
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold ${
+                hasMongo
+                  ? "bg-emerald-100 text-emerald-800 border border-emerald-300"
+                  : "bg-amber-100 text-amber-900 border border-amber-300"
+              }`}
+            >
+              <span
+                className={`w-2 h-2 rounded-full ${
+                  hasMongo ? "bg-emerald-500" : "bg-amber-500 animate-pulse"
+                }`}
+              />
+              {hasMongo
+                ? "MongoDB Bulutli Bazasi Ulangan (Faol)"
+                : "Ichki Standart Baza (Lokal/Serverless)"}
+            </span>
+          </div>
+
+          {!hasMongo && (
+            <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-xs text-slate-600 space-y-2">
+              <p className="font-bold text-slate-800">
+                💡 Vercel-da tovarlarni 100% doimiy saqlab qolish uchun MongoDB ulash:
+              </p>
+              <ol className="list-decimal list-inside space-y-1 text-[11px] leading-relaxed">
+                <li>
+                  <b>mongodb.com</b> (MongoDB Atlas) ga kirib, bepul klaster oching (5 daqiqa).
+                </li>
+                <li>
+                  Ulanish manzilini (<code>mongodb+srv://...</code>) nusxalang.
+                </li>
+                <li>
+                  Vercel profilingizda: <b>Settings &gt; Environment Variables</b> bo'limiga o'tib, <code>MONGODB_URI</code> nomi bilan o'sha ulanish manzilini qo'shing.
+                </li>
+                <li>
+                  Sayt barcha mahsulotlar va buyurtmalarni avtomatik tarzda MongoDB-ga ko'chiradi va doimiy saqlaydi!
+                </li>
+              </ol>
+            </div>
+          )}
         </div>
 
         {/* Save button */}

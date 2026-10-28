@@ -1,20 +1,22 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutDashboard,
   ShoppingBag,
   Package,
   Layers,
   Settings,
-  Send,
   ExternalLink,
   Zap,
+  LogOut,
+  Database,
 } from "lucide-react";
 
 export default function AdminSidebar() {
   const pathname = usePathname();
+  const router = useRouter();
 
   const links = [
     {
@@ -45,6 +47,16 @@ export default function AdminSidebar() {
     },
   ];
 
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/admin/logout", { method: "POST" });
+      router.push("/admin/login");
+      router.refresh();
+    } catch (e) {
+      console.error("Logout error:", e);
+    }
+  };
+
   return (
     <aside className="w-64 bg-slate-900 text-white shrink-0 hidden md:flex flex-col justify-between border-r border-slate-800">
       <div>
@@ -59,7 +71,7 @@ export default function AdminSidebar() {
                 OPTOM<span className="text-amber-500">ELEKTRO</span>
               </div>
               <div className="text-[10px] text-slate-400 font-semibold tracking-wider uppercase">
-                Boshqaruv Paneli
+                Backend Boshqaruv
               </div>
             </div>
           </Link>
@@ -91,16 +103,25 @@ export default function AdminSidebar() {
         </nav>
       </div>
 
-      {/* Footer / Store Link */}
-      <div className="p-4 border-t border-slate-800">
+      {/* Footer / Store Link & Logout */}
+      <div className="p-4 border-t border-slate-800 space-y-2">
         <Link
           href="/"
           target="_blank"
-          className="flex items-center justify-between px-4 py-3 rounded-xl bg-slate-800/80 hover:bg-slate-800 text-slate-300 hover:text-white text-xs font-semibold transition"
+          className="flex items-center justify-between px-4 py-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-800 text-slate-300 hover:text-white text-xs font-semibold transition"
         >
           <span>Do'konni ochish</span>
           <ExternalLink className="w-3.5 h-3.5" />
         </Link>
+
+        <button
+          type="button"
+          onClick={handleLogout}
+          className="w-full flex items-center justify-between px-4 py-2.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 hover:text-rose-300 text-xs font-semibold transition"
+        >
+          <span>Tizimdan chiqish</span>
+          <LogOut className="w-3.5 h-3.5" />
+        </button>
       </div>
     </aside>
   );

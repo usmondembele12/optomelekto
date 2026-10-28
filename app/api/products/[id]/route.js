@@ -22,6 +22,14 @@ export async function GET(request, context) {
 
 export async function PUT(request, context) {
   try {
+    const authCookie = request.cookies.get("optom_admin_auth");
+    if (authCookie?.value !== "authenticated_token_true") {
+      return NextResponse.json(
+        { success: false, error: "Avtorizatsiyadan o'tilmagan" },
+        { status: 401 }
+      );
+    }
+
     const { id } = await context.params;
     const body = await request.json();
 
@@ -45,6 +53,14 @@ export async function PUT(request, context) {
 
 export async function DELETE(request, context) {
   try {
+    const authCookie = request.cookies.get("optom_admin_auth");
+    if (authCookie?.value !== "authenticated_token_true") {
+      return NextResponse.json(
+        { success: false, error: "Avtorizatsiyadan o'tilmagan" },
+        { status: 401 }
+      );
+    }
+
     const { id } = await context.params;
     await deleteProduct(id);
     return NextResponse.json({ success: true, message: "Mahsulot o'chirildi" });
