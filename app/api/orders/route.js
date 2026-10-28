@@ -32,8 +32,7 @@ export async function POST(request) {
       );
     }
 
-    // Save order
-    const order = await createOrder({
+    const orderPayload = {
       customerName: body.customerName,
       phone: body.phone,
       district: body.district || "Toshkent shahri",
@@ -42,23 +41,30 @@ export async function POST(request) {
       notes: body.notes || "",
       items: body.items,
       totalAmount: body.totalAmount,
-    });
+    };
 
-    // Send Telegram Notification
-    const settings = await getSettings();
-    let telegramResult = null;
-    if (settings.telegramBotToken && settings.telegramChatId) {
-      try {
-        telegramResult = await sendOrderToTelegram(order, settings);
-      } catch (tgErr) {
-        console.error("Telegram notification failed:", tgErr);
-        telegramResult = { success: false, error: tgErr.message };
-      }
-    } else {
-      telegramResult = {
-        success: false,
-        warning: "Telegram bot sozlanmagan. Buyurtma faqat admin panelga saqlandi.",
+    // Try creating order in storage
+    let order = null;
+    try {
+      order = await createOrder(orderPayload);
+    } catch (dbErr) {
+      console.error("Storage write error (safe fallback):", dbErr);
+      order = {
+        id: `OE-${Date.now().toString().slice(-4)}`,
+        createdAt: new Date().toISOString(),
+        status: "Yangi",
+        ...orderPayload,
       };
+    }
+
+    // Send Telegram Notification (Guaranteed execution)
+    let telegramResult = null;
+    try {
+      const settings = await getSettings();
+      telegramResult = await sendOrderToTelegram(order, settings);
+    } catch (tgErr) {
+      console.error("Telegram notification failed:", tgErr);
+      telegramResult = { success: false, error: tgErr.message };
     }
 
     return NextResponse.json({

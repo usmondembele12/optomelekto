@@ -1,6 +1,29 @@
 {
   "orders": [
     {
+      "id": "OE-1005",
+      "createdAt": "2026-10-28T13:49:03.816Z",
+      "status": "Yangi",
+      "customerName": "Usmon aka",
+      "phone": "+998 90 123 45 67",
+      "district": "Sergeli tumani",
+      "address": "Yangi Sergeli ko'chasi, 12-uy",
+      "paymentMethod": "Naqd yetkazilganda",
+      "notes": "Vercel integratsiyasi uchun test buyurtma",
+      "items": [
+        {
+          "id": "prod-1",
+          "name": "Kabel VVG-P ng(A)-LS 3x2.5 mm² GOST (Mis)",
+          "price": 10800,
+          "quantity": 100,
+          "unit": "metr",
+          "subtotal": 1080000,
+          "isWholesale": true
+        }
+      ],
+      "totalAmount": 1080000
+    },
+    {
       "id": "OE-1004",
       "createdAt": "2026-10-26T16:51:13.290Z",
       "status": "Yangi",
