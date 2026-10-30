@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
@@ -17,10 +17,12 @@ import {
   CheckCircle,
 } from "lucide-react";
 import { useCart } from "@/context/cart-context";
+import { useAuth } from "@/context/auth-context";
 import { formatPrice } from "@/lib/utils";
 
 export default function CartPage() {
   const router = useRouter();
+  const { user } = useAuth();
   const {
     items,
     totalQuantity,
@@ -40,6 +42,20 @@ export default function CartPage() {
   const [notes, setNotes] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (user) {
+      if (user.fullName && !customerName) {
+        setCustomerName(user.fullName);
+      }
+      if (user.phone && phone === "+998 ") {
+        setPhone(user.phone);
+      }
+      if (user.address && !address) {
+        setAddress(user.address);
+      }
+    }
+  }, [user]);
 
   if (!mounted) {
     return (

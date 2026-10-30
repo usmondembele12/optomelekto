@@ -1,7 +1,16 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Zap, Phone, MapPin, Mail, Clock, Send, ShieldCheck, Truck, CreditCard } from "lucide-react";
 
 export default function Footer() {
+  const pathname = usePathname();
+
+  if (pathname === "/auth" || pathname?.startsWith("/admin")) {
+    return null;
+  }
+
   return (
     <footer className="bg-slate-950 text-slate-300 pt-16 pb-10 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">

@@ -1,0 +1,15 @@
+{
+  "users": [
+    {
+      "id": "usr_1793348940247_uj8p",
+      "fullName": "Sardor Botirov",
+      "phone": "+998123456789",
+      "password": "****",
+      "activityType": "Jismoniy shaxs",
+      "city": "Toshkent shahri",
+      "address": "",
+      "role": "customer",
+      "createdAt": "2026-10-30T08:29:00.248Z"
+    }
+  ]
+}

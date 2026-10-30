@@ -10,8 +10,9 @@ import {
   CheckCircle,
   Eye,
   Plus,
+  Users,
 } from "lucide-react";
-import { getOrders, getProducts, getCategories, getSettings } from "@/lib/db";
+import { getOrders, getProducts, getCategories, getSettings, getUsers } from "@/lib/db";
 import { formatPrice } from "@/lib/utils";
 
 export default async function AdminDashboardPage() {
@@ -19,6 +20,7 @@ export default async function AdminDashboardPage() {
   const products = await getProducts();
   const categories = await getCategories();
   const settings = await getSettings();
+  const users = await getUsers();
 
   const newOrdersCount = orders.filter((o) => o.status === "Yangi").length;
   const totalSales = orders.reduce((sum, o) => sum + (o.totalAmount || 0), 0);
@@ -105,17 +107,17 @@ export default async function AdminDashboardPage() {
       )}
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        <div className="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm space-y-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        <div className="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-sm space-y-2">
           <div className="flex items-center justify-between text-slate-400">
             <span className="text-xs font-bold uppercase tracking-wider">
               Yangi Buyurtmalar
             </span>
-            <div className="w-8 h-8 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center font-bold">
+            <div className="w-7 h-7 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center font-bold text-xs">
               !
             </div>
           </div>
-          <div className="text-3xl font-black text-rose-600">
+          <div className="text-2xl font-black text-rose-600">
             {newOrdersCount}
           </div>
           <p className="text-[11px] text-slate-500">
@@ -123,14 +125,14 @@ export default async function AdminDashboardPage() {
           </p>
         </div>
 
-        <div className="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm space-y-2">
+        <div className="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-sm space-y-2">
           <div className="flex items-center justify-between text-slate-400">
             <span className="text-xs font-bold uppercase tracking-wider">
               Jami Buyurtmalar
             </span>
             <ShoppingBag className="w-5 h-5 text-amber-500" />
           </div>
-          <div className="text-3xl font-black text-slate-900">
+          <div className="text-2xl font-black text-slate-900">
             {orders.length}
           </div>
           <p className="text-[11px] text-slate-500">
@@ -138,14 +140,29 @@ export default async function AdminDashboardPage() {
           </p>
         </div>
 
-        <div className="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm space-y-2">
+        <div className="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-sm space-y-2">
           <div className="flex items-center justify-between text-slate-400">
             <span className="text-xs font-bold uppercase tracking-wider">
-              Jami Savdo Aylanmasi
+              A'zo Mijozlar
+            </span>
+            <Users className="w-5 h-5 text-indigo-500" />
+          </div>
+          <div className="text-2xl font-black text-indigo-600">
+            {users.length}
+          </div>
+          <p className="text-[11px] text-slate-500">
+            Ro'yxatdan o'tgan mijozlar
+          </p>
+        </div>
+
+        <div className="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-sm space-y-2">
+          <div className="flex items-center justify-between text-slate-400">
+            <span className="text-xs font-bold uppercase tracking-wider">
+              Jami Savdo
             </span>
             <TrendingUp className="w-5 h-5 text-emerald-500" />
           </div>
-          <div className="text-2xl font-black text-emerald-600 truncate">
+          <div className="text-xl font-black text-emerald-600 truncate">
             {formatPrice(totalSales)}
           </div>
           <p className="text-[11px] text-slate-500">
@@ -153,14 +170,14 @@ export default async function AdminDashboardPage() {
           </p>
         </div>
 
-        <div className="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm space-y-2">
+        <div className="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-sm space-y-2">
           <div className="flex items-center justify-between text-slate-400">
             <span className="text-xs font-bold uppercase tracking-wider">
-              Mahsulotlar Soni
+              Mahsulotlar
             </span>
             <Package className="w-5 h-5 text-blue-500" />
           </div>
-          <div className="text-3xl font-black text-slate-900">
+          <div className="text-2xl font-black text-slate-900">
             {products.length}
           </div>
           <p className="text-[11px] text-slate-500">

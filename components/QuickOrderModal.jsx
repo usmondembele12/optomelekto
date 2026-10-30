@@ -1,10 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { X, CheckCircle, Send, Phone, User, MapPin } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
+import { useAuth } from "@/context/auth-context";
 
 export default function QuickOrderModal({ product, isOpen, onClose }) {
+  const { user } = useAuth();
   const [customerName, setCustomerName] = useState("");
   const [phone, setPhone] = useState("+998 ");
   const [district, setDistrict] = useState("Toshkent shahri");
@@ -13,6 +15,20 @@ export default function QuickOrderModal({ product, isOpen, onClose }) {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (user) {
+      if (user.fullName && !customerName) {
+        setCustomerName(user.fullName);
+      }
+      if (user.phone && phone === "+998 ") {
+        setPhone(user.phone);
+      }
+      if (user.address && !address) {
+        setAddress(user.address);
+      }
+    }
+  }, [user, isOpen]);
 
   if (!isOpen || !product) return null;
 
